@@ -1,10 +1,12 @@
-import React from 'react';
-
+import React from 'react'
+import Listing from 'listing'
 export default class ListingContainer extends React.Component {
   render() {
 	return (
-	 <div style={{textAlign: 'center'}}>
-		<h1>Hello World FROM APP2</h1>
-	  </div>)
+	 	<div style={{textAlign: 'center'}}>
+			<h1>Header</h1>
+			<Listing />
+	  </div>
+		)
   }
 }

@@ -12,6 +12,9 @@ module.exports = {
 	path: path.resolve('dist'),
 	filename: 'index_bundle.js'
   },
+	resolve: {
+		modules: ["node_modules", "web_modules"]
+	},
   module: {
 	loaders: [
 	  { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
