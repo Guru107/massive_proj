@@ -1,11 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
 
+import './index.css'
 class List1 extends React.Component {
 
 	render(){
 		return (
-			<div>
+			<div className="test">
 				<ul>
 					<li>List Item 1</li>
 					<li>List Item 2</li>
