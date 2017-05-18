@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import './index.css'
+import './index.less'
 class List1 extends React.Component {
 
 	render(){

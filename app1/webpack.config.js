@@ -4,23 +4,35 @@ const path = require('path'),
   template: './client/index.html',
   filename: 'index.html',
   inject: 'body'
-})
+}),
+BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+webpack = require('webpack')
 
 module.exports = {
-  entry: './client/index.js',
+  entry: {app:'./client/index.js'},
   output: {
 	path: path.resolve('dist'),
-	filename: 'index_bundle.js'
+	filename: '[name].js'
   },
 	resolve: {
-		modules: ["node_modules", "web_modules"]
+		modules: [path.join(__dirname,'node_modules'), "web_modules"]
 	},
   module: {
 	loaders: [
 	  { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
 	  { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
-		{ test: /\.css$/, loader: 'style-loader!css-loader', exclude: /node_modules/ }
+		{ test: /\.less$/, loader: 'style-loader!css-loader!less-loader', exclude: /node_modules/ }
 	]
   },
-	plugins: [HtmlWebpackPluginConfig]
+	stats:'verbose',
+	plugins: [
+		HtmlWebpackPluginConfig,
+		new webpack.optimize.CommonsChunkPlugin({
+			name:'vendor',
+			minChunks: function(module){ 
+				return module.context && module.context.indexOf("node_modules") !== -1 ;
+			}
+		}),
+		new webpack.EnvironmentPlugin(['NODE_ENV'])
+	]
 }
