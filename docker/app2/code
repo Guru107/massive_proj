@@ -1,0 +1,11 @@
+FROM hyperloop/app2_modules
+
+ADD app2 /home/code/app2/
+
+WORKDIR /home/code/app2
+
+RUN npm run build
+
+EXPOSE 8090
+
+ENTRYPOINT npm run dev

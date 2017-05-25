@@ -1,0 +1,11 @@
+FROM mhart/alpine-node:6
+#https://github.com/mhart/alpine-node
+
+# Add SSH inside Docker Container
+ADD .ssh /root/.ssh
+
+ADD package.json /home/code/web_modules/package.json
+
+RUN chmod 0600 /root/.ssh/id_rsa && \
+	cd /home/code/web_modules && \
+	npm install --verbose

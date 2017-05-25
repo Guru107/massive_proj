@@ -14,6 +14,11 @@ module.exports = {
 	path: path.resolve('dist'),
 	filename: '[name].js'
   },
+ 	devServer:{
+	  host:'0.0.0.0',
+	  port:'8090',
+		disableHostCheck: true
+  },
 	resolve: {
 		modules: [path.join(__dirname,'node_modules'), "web_modules"]
 	},

@@ -1,0 +1,10 @@
+FROM hyperloop/web_modules
+
+# Add SSH inside Docker Container
+ADD .ssh /root/.ssh
+
+ADD package.json /home/code/app1/package.json
+
+RUN chmod 0600 /root/.ssh/id_rsa && \
+	cd /home/code/app1 && \
+	npm install --verbose

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
 	"test": "echo \"Error: no test specified\" && exit 1",
-	"start": "better-npm-run dev",
-	"compile": "better-npm-run compile"
+	"dev": "better-npm-run dev",
+	"build": "better-npm-run compile"
   },
   "betterScripts": {
 	"compile": {

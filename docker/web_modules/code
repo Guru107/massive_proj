@@ -1,0 +1,3 @@
+FROM hyperloop/web_node_modules
+
+ADD web_modules /home/code/web_modules/
