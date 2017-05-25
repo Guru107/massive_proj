@@ -1,0 +1,71 @@
+version: "2"
+services:
+	node:
+		image: "mhart/alpine-node:6"
+
+	nginx:
+		image: "smebberson/alpine-nginx"
+
+	reverse_proxy:
+		image: hyperloop/nginx
+		build:
+			context: ./docker/proxy
+			dockerfile: Dockerfile
+		ports:
+			- '80:80'
+		depends_on:
+			- nginx
+
+  web_node_modules:
+		image: hyperloop/web_node_modules
+		build:
+			context: ./web_modules
+			dockerfile: docker/modules
+		depends_on:
+			- node
+
+  web_modules:
+		image: hyperloop/web_modules
+		build:
+			context: ./web_modules
+			dockerfile: docker/code
+		volumes:
+			- ./web_modules/.:/home/code/web_modules/
+		depends_on:
+			- web_node_modules
+	  
+	app1_modules:
+		image: hyperloop/app1_modules
+		build:
+			context: ./app1
+			dockerfile: docker/app1_modules
+		depends_on:
+			- web_modules
+
+	app1:
+		image: hyperloop/app1_code
+		build:
+			context: ./app1
+			dockerfile: docker/code
+		volumes:
+			- ./app1/.:/home/code/app1/
+		depends_on:
+			- app1_modules
+
+	app2_modules:
+		image: hyperloop/app2_modules
+		build:
+			context: ./app2
+			dockerfile: docker/app2_modules
+		depends_on:
+			- web_modules
+
+	app2:
+		image: hyperloop/app2_code
+		build:
+			context: ./app2
+			dockerfile: docker/code
+		volumes:
+			- ./app2/.:/home/code/app2/
+		depends_on:
+			- app2_modules
